@@ -5,7 +5,6 @@ This repository contains the implementation of the 3MT-RoadSeg method in Pytorch
 
 The training setup in the repo is now available for the KITTI and Cityscapes datasets. Training setups will be created for new data sets in the coming period.
 
-[Resim2](https://user-images.githubusercontent.com/50530899/215702892-0301be4e-d83c-4e98-a04d-ef924fa6178f.png)
 
 ### Training!
 The configuration files to train the model can be found in the `configs/` directory. The model can be trained by running the following command:
