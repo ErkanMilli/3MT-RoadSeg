@@ -25,11 +25,9 @@ eval_final_10_epochs_only: True
 ## Support
 The following datasets and tasks are supported.
 
-| Dataset | Sem. Seg. | Depth | Normals | Edge | Saliency | Human Parts |
-|---------|-----------|-------|---------|----------------|----------|-------------|
-| PASCAL  |     Y     |   N   |    Y    |       Y        |    Y     |      Y      |
-| NYUD    |     Y     |   Y   |    Aux  |       Aux       |    N     |      N      |
-| KITTI   |     Y     |   Y   |   
+| Dataset      | Sem. Seg. | Depth | Normals |
+| KITTI        |     Y     |   Y   |    Aux  | 
+| Cityscapes   |     Y     |   Aux |    Y    | 
 
 
 The following models are supported.
