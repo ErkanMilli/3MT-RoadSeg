@@ -1,5 +1,5 @@
 # 3MT-RoadSeg
-## Multi-modal multi-task Road Segmentation
+## Multi-modal Multi-task Road Segmentation
 
 
 ### Training
