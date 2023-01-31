@@ -34,7 +34,7 @@ The following datasets and tasks are supported.
 The following models are supported.
 
 | Backbone | HRNet-w18 | HRNet-w32 | HRNet-w48 |
-|----------|-----------|-----------|
+|----------|-----------|-----------|-----------|
 | Single-Task |  Y  |  Y  |  Y  |
 | Multi-Task |  Y  |    |   |
 | PAD-Net |  Y  |    |    |
