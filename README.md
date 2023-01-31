@@ -26,6 +26,7 @@ eval_final_10_epochs_only: True
 The following datasets and tasks are supported.
 
 | Dataset      | Sem. Seg. | Depth | Normals |
+|--------------|-----------|-------|---------|
 | KITTI        |     Y     |   Y   |    Aux  | 
 | Cityscapes   |     Y     |   Aux |    Y    | 
 
