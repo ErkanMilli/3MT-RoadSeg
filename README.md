@@ -1,6 +1,7 @@
 # 3MT-RoadSeg
 ## Multi-modal Multi-task Road Segmentation
 
+This repository contains the implementation of the 3MT-RoadSeg method in Pytorch.
 
 ### Training
 The configuration files to train the model can be found in the `configs/` directory. The model can be trained by running the following command:
