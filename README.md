@@ -1,7 +1,7 @@
 # 3MT-RoadSeg
 ## Multi-modal Multi-task Road Segmentation
 
-This repository contains the implementation of the 3MT-RoadSeg method in Pytorch.
+This repository contains the implementation of the 3MT-RoadSeg method in Pytorch. 3MT-RoadSeg is a fast and accurate method that does not need any preprocessing and uses only raw sensor inputs.
 
 The training setup in the repo is now available for the KITTI and Cityscapes datasets. Training setups will be created for new data sets in the coming period.
 
