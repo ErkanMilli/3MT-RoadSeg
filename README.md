@@ -33,15 +33,12 @@ The following datasets and tasks are supported.
 
 The following models are supported.
 
-| Backbone | HRNet | ResNet |
-|----------|----------|-----------|
-| Single-Task |  Y    |  Y |
-| Multi-Task | Y | Y |
-| Cross-Stitch | | Y |
-| NDDR-CNN | | Y |
-| MTAN | | Y |
-| PAD-Net | Y | |
-| MTI-Net | Y | |
+| Backbone | HRNet-w18 | HRNet-w32 | HRNet-w48 |
+|----------|-----------|-----------|
+| Single-Task |  Y  |  Y  |  Y  |
+| Multi-Task |  Y  |    |   |
+| PAD-Net |  Y  |    |    |
+| MTI-Net |  Y  |  Y  |  Y  |
 
 
 
