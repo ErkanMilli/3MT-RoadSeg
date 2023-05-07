@@ -1,4 +1,4 @@
-# UNDER CONSTRUCTION
+# UNDER CONSTRUCTION...
 
 ## 3MT-RoadSeg
 ### Multi-modal Multi-task Road Segmentation
