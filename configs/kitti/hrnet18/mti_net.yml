@@ -5,11 +5,11 @@ setup: multi_task
 train_db_name: KITTI
 val_db_name: KITTI
 trBatch: 4
-valBatch: 4
-nworkers: 4
+valBatch: 8
+nworkers: 8
 
 # Optimizer and scheduler
-epochs: 10
+epochs: 100
 optimizer: adam
 optimizer_kwargs:
    lr: 0.0005
@@ -19,11 +19,9 @@ scheduler: poly
 # Model
 model: mti_net
 backbone: hrnet_w18
-# backbone: resnet50
 backbone_kwargs:
    pretrained: True
    dilated: False
-# head: hrnet
 head: hrnet
 
 # Tasks
@@ -40,7 +38,7 @@ loss_kwargs:
    loss_scheme: mti_net
    loss_weights:
        semseg: 1.0
-       depth: 0.1
+       depth: 0.8
 
 # Eval only final 10 epochs for speed-up
 eval_final_10_epochs_only: True
