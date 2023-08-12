@@ -4,12 +4,12 @@ setup: single_task
 # Database
 train_db_name: KITTI
 val_db_name: KITTI 
-trBatch: 8
-valBatch: 16
-nworkers: 16
+trBatch: 4
+valBatch: 8
+nworkers: 8
 
 # Optimizer and scheduler
-epochs: 40
+epochs: 100
 optimizer: adam
 optimizer_kwargs:
    lr: 0.0001
