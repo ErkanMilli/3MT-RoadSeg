@@ -103,12 +103,6 @@ class CityScapes(data.Dataset):
             raise Exception("No RGB images for split=[%s] found in %s" % (split, self.image_base))
         if not self.disparities[split]:
             raise Exception("No depth images for split=[%s] found in %s" % (split, self.disparity_base))
-            
-        # # Uncomment to overfit to one image
-        # if overfit:
-        #     n_of = 64
-        #     self.images = self.images[:n_of]
-        #     self.im_ids = self.im_ids[:n_of]    
 
         print("Found %d %s RGB images" % (len(self.images[split]), split))
         print("Found %d %s disparity images" % (len(self.disparities[split]), split))
@@ -137,18 +131,12 @@ class CityScapes(data.Dataset):
         label_image = cv2.imread(lbl_path, cv2.IMREAD_GRAYSCALE)
         oriHeight, oriWidth = label_image.shape
         if self.do_semseg:
-            # label_image = cv2.imread(lbl_path, cv2.IMREAD_GRAYSCALE)
-            # oriHeight, oriWidth = label_image.shape
             label = np.zeros((oriHeight, oriWidth), dtype=np.uint8)
             # reserve the 'road' class
             label[label_image == 7] = 1
-            # _target = Image.fromarray(label)
-            # _target = cv2.resize(_target, (int(self.img_size[0]), int(self.img_size[1])), interpolation=cv2.INTER_NEAREST)
             _target = cv2.resize(label, self.img_size, interpolation=cv2.INTER_NEAREST)
             sample['semseg'] = _target
             sample['semseg'] = np.array(sample['semseg']).astype(np.float32)
-            # sample['semseg'] = torch.from_numpy(sample['semseg']).long()
-
         
         # if self.do_depth:
         disp_image = cv2.imread(disp_path, cv2.IMREAD_ANYDEPTH)
@@ -157,24 +145,8 @@ class CityScapes(data.Dataset):
         # _depth = Image.fromarray(depth)
         _depth = np.array(depth).astype(np.float32)
         _depth = cv2.resize(_depth, (int(self.img_size[0]), int(self.img_size[1])), interpolation=cv2.INTER_NEAREST)
-        # sample['depth'] = _depth
-        # _depth = np.random.normal(0, 0.01, (int(self.img_size[1]), int(self.img_size[0])))
         sample['depth'] = cv2.merge([_depth, _depth, _depth])
         
-        # sample['lidar'] = _depth
-        
-        
-        # sample = {'image': _img, 'depth': _depth, 'label': _target}
-
-        # if self.split == 'train':
-        #     sample = self.transform_tr(sample)
-        # elif self.split == 'val':
-        #     sample = self.transform_val(sample)
-        # elif self.split == 'test':
-        #     sample = self.transform_ts(sample)
-        # else:
-        #     sample = self.transform_ts(sample)
-
         # if self.do_normals:
         # depth_image = np.array(sample['depth'])
         depth_image = _depth
@@ -183,12 +155,9 @@ class CityScapes(data.Dataset):
                           [0, 0, 1]])
         camParam = torch.tensor(calib, dtype=torch.float32)
         normal = self.sne_model(torch.tensor(depth_image.astype(np.float32)), camParam)
-        # normal = normal.cpu().numpy()
         normal = normal.cpu().numpy().astype(np.float32)
         normal = np.transpose(normal, [1, 2, 0])
-        # normal = cv2.resize(normal, (self.args.crop_width, self.args.crop_height))
         normal = cv2.resize(normal, (int(self.img_size[0]), int(self.img_size[1])), interpolation=cv2.INTER_CUBIC)
-        # normal = transforms.ToTensor()(normal)
         sample['normals'] = normal
 
         
@@ -209,28 +178,3 @@ class CityScapes(data.Dataset):
         return [os.path.join(looproot, filename)
                 for looproot, _, filenames in os.walk(rootdir)
                 for filename in filenames if filename.endswith(suffix)]
-
-    # def transform_tr(self, sample):
-    #     composed_transforms = transforms.Compose([
-    #         tr.RandomHorizontalFlip(),
-    #         tr.RandomGaussianBlur(),
-    #         tr.RandomGaussianNoise(),
-    #         tr.Resize(size=(self.args.crop_width, self.args.crop_height)),
-    #         tr.ColorJitter(brightness=0.4, contrast=0.4, saturation=0.4),
-    #         tr.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
-    #         tr.ToTensor()])
-    #     return composed_transforms(sample)
-
-    # def transform_val(self, sample):
-    #     composed_transforms = transforms.Compose([
-    #         tr.Resize(size=(self.args.crop_width, self.args.crop_height)),
-    #         tr.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
-    #         tr.ToTensor()])
-    #     return composed_transforms(sample)
-
-    # def transform_ts(self, sample):
-    #     composed_transforms = transforms.Compose([
-    #         tr.Resize(size=(self.args.crop_width, self.args.crop_height)),
-    #         tr.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
-    #         tr.ToTensor()])
-    #     return composed_transforms(sample)
