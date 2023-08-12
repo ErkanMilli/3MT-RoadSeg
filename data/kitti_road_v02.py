@@ -181,10 +181,7 @@ class KITTIRoad(data.Dataset):
             # _depth_gt_dir = os.path.join( self.root, 'depth_u16_cropped')
 
        
-
         print('Initializing dataloader for KITTIRoad {} set'.format(''.join(self.split)))
-    
-            
 
         # Images & Lidars
         self.image_files = recursive_glob(_image_dir, suffix='.png')
@@ -209,15 +206,6 @@ class KITTIRoad(data.Dataset):
         self.depth_files = recursive_glob(_depth_gt_dir, suffix='.png')
         self.depths = sorted(self.depth_files)
 
-        # if self.do_edge:
-        #     assert (len(self.images) == len(self.edges))
-        # if self.do_semseg:
-        #     assert (len(self.images) == len(self.semsegs))
-        # if self.do_depth:
-        #     assert (len(self.images) == len(self.depths))
-        # if self.do_normals:
-        #     assert (len(self.images) == len(self.normals))
-
         # Uncomment to overfit to one image
         if overfit:
             n_of = 64
@@ -233,102 +221,38 @@ class KITTIRoad(data.Dataset):
         img_path = self.images[index].rstrip()
         im_name_splits = img_path.split(os.sep)[-1].split('.')[0].split('_')
         im_idss = im_name_splits[0] + '_' + im_name_splits[1]
-        
-        
-        # _img = self._load_img(index) / 256
+
         _img = self._load_img(index)
-        # _img -= self.mean
-        # _img = ((_img - self.mean)/self.std).astype(np.float32)
-        # _img = ((_img - self.mean)/self.std)
         img = cv2.resize(_img, self.img_size)
-        # img = img.transpose(2, 0, 1)
-        # if self.split == 'train':
-        #     img = img.transpose(0, 3, 1, 2)
-        # img = torch.transpose(img, 0, 2)
+       
         sample['image'] = img
         
         _lidar = self._load_lidar(index)
         _lidar = _lidar / 128.
         _lidar = _lidar - np.mean(_lidar[_lidar>0]) 
-        # _lidar = _lidar / 65535.
-        # _lidar = _lidar / 255*2 - 1.
         _lidar = cv2.resize(_lidar, self.img_size)
-        # _lidar = _lidar.transpose(2, 0, 1)
         sample['lidar'] = _lidar
-        # sample['lidar'] = cv2.merge([_lidar, _lidar, _lidar])
-
+        
         if self.do_edge:
             _edge = self._load_edge(index)
-            # if _edge.shape != _img.shape[:2]:
-            #     _edge = cv2.resize(_edge, _img.shape[:2][::-1], interpolation=cv2.INTER_NEAREST)
             sample['edge'] = _edge
 
         if self.do_semseg:
             lbl_tmp = self._load_semseg(index)
-                 
-            # lbl_tmp = np.array(lbl_tmp, dtype=np.uint8)
-            # _semseg = 255 + np.zeros( (_img.shape[0], _img.shape[1]), np.uint8)
-            # _semseg[lbl_tmp[:,:,2] > 0] = 1
-            # _semseg[(lbl_tmp[:,:,2] > 0) & (lbl_tmp[:,:,0] == 0)] = 0
-            
-            
-         
-            # label_array = np.asarray(lbl_tmp)
-            # # Current class label encoding
-            # non_road_label = np.array([255,0,0])
-            # # road_label = np.array([255,0,255])
-            # # other_road_label = np.array([0,0,0])
-            
-            # # Create binary class label (1=road, 0=not road) by inverting non-road label
-            # # _semseg = (1-np.all(label_array==non_road_label, axis=2) - np.all(label_array==other_road_label, axis=2)).astype(np.float32)
-            # _semseg = (1-np.all(label_array==non_road_label, axis=2)).astype(np.float32)
-            # # _semseg =  label_array[:,:,2]         
-            # # Binary label image
-            # # _semseg = pil.Image.fromarray(_semseg*255)
-            # # _semseg.show()
-            
-            
             _semseg = np.zeros((int(_img.shape[0]), int(_img.shape[1])), dtype=np.uint8)
             _semseg[lbl_tmp[:, :, 2] > 0] = 1
-            
-        
-            
             _semseg = cv2.resize(_semseg, (int(self.img_size[0]), int(self.img_size[1])), interpolation=cv2.INTER_NEAREST)
-            # _semseg = _semseg.astype(np.float32)
-            # if _semseg.shape != _img.shape[:2]:
-            #     print('RESHAPE SEMSEG')
-            #     _semseg = cv2.resize(_semseg, _img.shape[:2][::-1], interpolation=cv2.INTER_NEAREST) 
-            # _semseg = _semseg[None,:,:]
             sample['semseg'] = _semseg
 
         if self.do_normals:
             _normals = self._load_normals(index)
-            
-            # _normals = _normals.astype(np.float64) / 255.
-            # _normals = _normals.astype(np.float64) / 255*2 - 1.
             _normals = cv2.resize(_normals, (int(self.img_size[0]), int(self.img_size[1])), interpolation=cv2.INTER_CUBIC)
-            # _normals = _normals.transpose(2, 0, 1)
-            # if _normals.shape[:2] != _img.shape[:2]:
-            #     _normals = cv2.resize(_normals, _img.shape[:2][::-1], interpolation=cv2.INTER_CUBIC)
-            # _normals = _normals[None,:,:]
             sample['normals'] = _normals
 
         if self.do_depth:
             _depth = self._load_depth(index)
-            
             _depth = _depth.astype(np.float64) / 65535.
-            # _depth[_depth>80] = 80
-            # _depth[_depth<1e-3] = 1e-3
-            # _depth = _depth.astype(np.float64) / 65535.
-            # _depth = _depth.astype(np.float64) / 1000.
-            # _depth = _depth / 65535
-            
-            
             _depth = cv2.resize(_depth, (int(self.img_size[0]), int(self.img_size[1])), interpolation=cv2.INTER_NEAREST)
-            # if _depth.shape[:2] != _img.shape[:2]:
-            #     print('RESHAPE DEPTH')
-            #     _depth = cv2.resize(_depth, _img.shape[:2][::-1], interpolation=cv2.INTER_NEAREST)
-            # _depth = _depth[None,:,:]
             sample['depth'] = _depth
 
         if self.retname:
@@ -350,9 +274,6 @@ class KITTIRoad(data.Dataset):
 
     def _load_lidar(self, index):
         _lidar = np.array(Image.open(self.lidars[index]).convert('RGB')).astype(np.float32)
-        # _lidar = np.array(Image.open(self.lidars[index])).astype(np.uint8)
-        # _lidar = cv2.imread(os.path.join(self.lidars[index]), cv2.IMREAD_UNCHANGED)
-        # _lidar = np.array(_lidar, dtype=np.uint8)
         return _lidar
     
     def _load_edge(self, index):
@@ -360,13 +281,6 @@ class KITTIRoad(data.Dataset):
         return _edge
 
     def _load_semseg(self, index):
-        # # Note: We ignore the background class as other related works.
-        # _semseg = np.array(Image.open(self.semsegs[index])).astype(np.float32)
-        # # _semseg = cv2.imread(self.semsegs[index], cv2.IMREAD_UNCHANGED)
-        # # _semseg = pil.Image.open(self.semsegs[index])
-        # # _semseg.show()
-        # # _semseg[_semseg == 0] = 256
-        # # _semseg = _semseg - 1
         _semseg = cv2.cvtColor(cv2.imread(self.semsegs[index]), cv2.COLOR_BGR2RGB)
         return _semseg
 
@@ -379,27 +293,6 @@ class KITTIRoad(data.Dataset):
         _normals = np.array(Image.open(self.normals[index])).astype(np.float32)
         # _normals = np.load(self.normals[index])
         return _normals
-
-    # def _download(self):
-    #     _fpath = os.path.join(MyPath.db_root_dir(), self.FILE)
-
-    #     if os.path.isfile(_fpath):
-    #         print('Files already downloaded')
-    #         return
-    #     else:
-    #         print('Downloading from google drive')
-    #         mkdir_if_missing(os.path.dirname(_fpath))
-    #         download_file_from_google_drive(self.GOOGLE_DRIVE_ID, _fpath)
-
-    #     # extract file
-    #     cwd = os.getcwd()
-    #     print('\nExtracting tar file')
-    #     tar = tarfile.open(_fpath)
-    #     os.chdir(MyPath.db_root_dir())
-    #     tar.extractall()
-    #     tar.close()
-    #     os.chdir(cwd)
-    #     print('Done!')
 
     def __str__(self):
         return 'NYUD Multitask (split=' + str(self.split) + ')'
