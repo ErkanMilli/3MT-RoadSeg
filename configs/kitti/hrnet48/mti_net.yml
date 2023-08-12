@@ -39,7 +39,7 @@ loss_kwargs:
    loss_scheme: mti_net
    loss_weights:
        semseg: 1.0
-       depth: 0.5
+       depth: 0.8
 
 # Eval only final 10 epochs for speed-up
 eval_final_10_epochs_only: False
