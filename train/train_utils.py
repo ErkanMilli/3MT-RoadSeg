@@ -1,3 +1,4 @@
+# Licensed under the CC BY-NC 4.0 license (https://creativecommons.org/licenses/by-nc/4.0/)
 
 from evaluation.evaluate_utils import PerformanceMeter
 from utils.utils import AverageMeter, ProgressMeter, get_output, get_output_val
@@ -48,14 +49,9 @@ def train_vanilla(p, train_loader, model, criterion, optimizer, epoch):
         images = batch['image'].cuda(non_blocking=True)
         lidars = batch['lidar'].cuda(non_blocking=True)
         targets = {task: batch[task].cuda(non_blocking=True) for task in p.ALL_TASKS.NAMES}
-        # targets['depth'] = targets['depth'][:,None,:]
-        # targets['semseg'] = targets['semseg'][:,None,:]
-        # targets['normal'] = targets['normal'][:,0,:]
         targets['depth'] = targets['depth'][:,0,:]
         targets['semseg'] = targets['semseg'][:,0,:]
         output = model([images, lidars])
-        # output = model(images)
-        # output = model(lidars)
         
         # Measure loss and performance
         loss_dict = criterion(output, targets)
