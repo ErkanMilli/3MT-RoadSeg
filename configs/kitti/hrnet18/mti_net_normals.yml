@@ -4,12 +4,12 @@ setup: multi_task
 # Database
 train_db_name: KITTI
 val_db_name: KITTI 
-trBatch: 8
+trBatch: 4
 valBatch: 8
-nworkers: 4
+nworkers: 8
 
 # Optimizer and scheduler
-epochs: 20
+epochs: 100
 optimizer: adam
 optimizer_kwargs:
    lr: 0.0001
@@ -29,7 +29,6 @@ head: hrnet
 task_dictionary:
    include_semseg: True
    include_depth: True
-   # include_normals: True
 
 auxilary_task_dictionary:
    include_semseg: True
@@ -41,7 +40,7 @@ loss_kwargs:
    loss_scheme: mti_net
    loss_weights:
        semseg: 1.0
-       depth: 0.01
+       depth: 0.8
        normals: 0.1
 
 # Eval only final 10 epochs for speed-up
