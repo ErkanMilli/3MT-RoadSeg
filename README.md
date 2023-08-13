@@ -14,23 +14,7 @@ You can download the KITTI road dataset from [KITTI](https://www.cvlibs.net/data
 
 3MT-RoadSeg
  |-- data 
- |  |-- KITTI
- |  |  |-- training
- |  |  |  |-- calib
- |  |  |  |-- depth_u16
- |  |  |  |-- gt_image_2
- |  |  |  |-- image_2
- |  |  |-- validating
- |  |  |  |-- calib
- |  |  |  |-- depth_u16
- |  |  |  |-- gt_image_2
- |  |  |  |-- image_2
- |  |  |-- testing
- |  |  |  |-- calib
- |  |  |  |-- depth_u16
- |  |  |  |-- image_2
- |-- models
- ...
+ 
 
 
 ## Support
