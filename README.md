@@ -47,6 +47,6 @@ The following models are supported.
 | 3MT-RoadSeg |  Y  |  Y  |  Y  |
 
 ## References
-This repository has been created based on the code base from repository [Multi-Task-Learning-PyTorch](https://github.com/SimonVandenhende/Multi-Task-Learning-PyTorch)https://github.com/SimonVandenhende/Multi-Task-Learning-PyTorch.
+This repository has been created based on the code base from repository [Multi-Task-Learning-PyTorch]([https://github.com/SimonVandenhende/Multi-Task-Learning-PyTorch).
 
 
