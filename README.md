@@ -12,9 +12,25 @@ The training setup in the repo is now available for the KITTI and Cityscapes dat
 ## Datasets
 You can download the KITTI road dataset from [KITTI](https://www.cvlibs.net/datasets/kitti/) and the Cityscapes road dataset from [Cityscapes](https://www.cityscapes-dataset.com/). Depth images can be obtained from the [SNE-RoadSeg](https://github.com/hlwang1124/SNE-RoadSeg). You can access the 3-channel ADIs from here.
 
-3MT-RoadSeg
-|-- data |
- 
+USNet
+ |-- data
+ |  |-- KITTI
+ |  |  |-- training
+ |  |  |  |-- calib
+ |  |  |  |-- depth_u16
+ |  |  |  |-- gt_image_2
+ |  |  |  |-- image_2
+ |  |  |-- validating
+ |  |  |  |-- calib
+ |  |  |  |-- depth_u16
+ |  |  |  |-- gt_image_2
+ |  |  |  |-- image_2
+ |  |  |-- testing
+ |  |  |  |-- calib
+ |  |  |  |-- depth_u16
+ |  |  |  |-- image_2
+ |-- models
+ ...
 
 
 ## Support
