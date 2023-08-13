@@ -15,7 +15,7 @@ The training setup in the repo is now available for the KITTI and Cityscapes dat
 ## Support
 The following datasets and tasks are supported.
 
-| Dataset      | Sem. Seg. | Depth | Normals |
+| Dataset      | Segmentation | Depth | Normals |
 |--------------|-----------|-------|---------|
 | KITTI        |     Y     |   Y   |    Aux  | 
 | Cityscapes   |     Y     |   Aux |    Y    | 
