@@ -52,6 +52,8 @@ The following models are supported.
 |----------|-----------|-----------|-----------|
 | 3MT-RoadSeg |  Y  |  Y  |  Y  |
 
+You can download the weights belonging to the pre-trained HRNet backbones from  [source](https://github.com/HRNet/HRNet-Image-Classification).
+
 ## References
 This repository has been built upon the foundation of repository [Multi-Task-Learning-PyTorch](https://github.com/SimonVandenhende/Multi-Task-Learning-PyTorch).
 
