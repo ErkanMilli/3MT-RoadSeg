@@ -25,10 +25,7 @@ The following models are supported.
 
 | Backbone | HRNet-w18 | HRNet-w32 | HRNet-w48 |
 |----------|-----------|-----------|-----------|
-| Single-Task |  Y  |  Y  |  Y  |
-| Multi-Task |  Y  |    |   |
-| PAD-Net |  Y  |    |    |
-| MTI-Net |  Y  |  Y  |  Y  |
+| 3MT-RoadSeg |  Y  |  Y  |  Y  |
 
 
 
