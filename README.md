@@ -36,7 +36,7 @@ You can download the KITTI road dataset from [KITTI](https://www.cvlibs.net/data
 ## Support
 The following datasets and tasks are supported.
 
- Dataset      | Segmentation | Depth | Normals 
+| Dataset      | Segmentation | Depth | Normals |
 |--------------|-----------|-------|---------|
 | KITTI        |     Y     |   Y   |    Aux  | 
 | Cityscapes   |     Y     |   Aux |    Y    | 
