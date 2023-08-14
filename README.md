@@ -57,4 +57,8 @@ You can download the weights belonging to the pre-trained HRNet backbones from  
 ## References
 This repository has been built upon the foundation of repository [Multi-Task-Learning-PyTorch](https://github.com/SimonVandenhende/Multi-Task-Learning-PyTorch).
 
+## Citation
+```
+E. Milli, Ö. Erkent and A. E. Yılmaz, "Multi-Modal Multi-Task (3MT) Road Segmentation," in IEEE Robotics and Automation Letters, vol. 8, no. 9, pp. 5408-5415, Sept. 2023, doi: 10.1109/LRA.2023.3295254.
+```
 
