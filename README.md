@@ -41,7 +41,7 @@ Configuration files are located in the ```configs/``` directory. You have the op
 ```
 training.py --config_env configs/env.yml --config_exp configs/$DATASET/$BACKBONE/$MODEL.yml
 ```
-If you want to use the split we use as the validation set, you can download it here.
+You can utilize the same split that we use for the validation set. Please download it here.
 
 ## Support
 The following datasets and tasks are supported.
