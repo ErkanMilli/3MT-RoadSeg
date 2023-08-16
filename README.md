@@ -35,7 +35,12 @@ You can download the KITTI road dataset from [KITTI](https://www.cvlibs.net/data
  |  |  |  |  |  |-- ...
  ...
 ```
-
+## Usage
+### Training
+Configuration files are located in the configs/ directory. You can split the original training set into a new training set and a validation set as you wish. Then run the script below:
+...
+training.py --config_env configs/env.yml --config_exp configs/$DATASET/$BACKBONE/$MODEL.yml
+...
 
 ## Support
 The following datasets and tasks are supported.
