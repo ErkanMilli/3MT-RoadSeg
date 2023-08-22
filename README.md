@@ -5,7 +5,7 @@ This repository contains the implementation of the 3MT-RoadSeg method in Pytorch
 
 The training setup in the repo is now available for the KITTI and Cityscapes datasets. Training setups will be created for new data sets in the coming period.
 
-![Resim2](https://user-images.githubusercontent.com/50530899/215703789-ed633586-ca8c-4d44-a74d-366e201a3cd5.png)
+![Scheme](https://user-images.githubusercontent.com/50530899/215703789-ed633586-ca8c-4d44-a74d-366e201a3cd5.png)
 
 ## Package Versions
 The package versions used during code development are as follows:
@@ -41,7 +41,20 @@ Configuration files are located in the ```configs/``` directory. You have the op
 ```
 training.py --config_env configs/env.yml --config_exp configs/$DATASET/$BACKBONE/$MODEL.yml
 ```
-You can utilize the same split that we use for the validation set. Please download it here.
+You can perform a test on the validation set created by splitting the training set. You will need the chechpoint.pth.rar file for this. 
+```
+testing.py
+```
+
+You can utilize the same split that we use for the validation set:
+```
+um_000000.png  |  umm_000000.png  |  uu_000000.png
+...            |  ...             |  ...
+...            |  ...             |  ...
+um_000067.png  |  umm_000067.png  |  uu_000067.png
+
+```
+
 
 ## Support
 The following datasets and tasks are supported.
