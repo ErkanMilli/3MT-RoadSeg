@@ -39,19 +39,21 @@ You can download the KITTI road dataset from [KITTI](https://www.cvlibs.net/data
 ### Training
 Configuration files are located in the ```configs/``` directory. You have the option to alter the training settings from this directory if you prefer. You can split the original training set into a new training set and a validation set as you wish. Then run the script below:
 ```
-training.py --config_env configs/env.yml --config_exp configs/$DATASET/$BACKBONE/$MODEL.yml
+train.py --config_env configs/env.yml --config_exp configs/$DATASET/$BACKBONE/$MODEL.yml
 ```
 You can perform a test on the validation set created by splitting the training set. You will need the chechpoint.pth.rar file for this. 
 ```
-testing.py
+test.py
 ```
 
-You can utilize the same split that we use for the validation set:
+You can use the same split we used for the validation set generated from the training set. The train & test split is as follows:
 ```
-um_000000.png  |  umm_000000.png  |  uu_000000.png
-...            |  ...             |  ...
-...            |  ...             |  ...
-um_000067.png  |  umm_000067.png  |  uu_000067.png
+| Train Split  |                                                | Test Split   |
+|--------------|                                                |--------------|
+um_000000.png  |  umm_000000.png  |  uu_000000.png              um_000068.png  |  umm_000068.png  |  uu_000068.png
+...            |  ...             |  ...                        ...            |  ...             |  ...
+...            |  ...             |  ...                        ...            |  ...             |  ...
+um_000067.png  |  umm_000067.png  |  uu_000067.png              um_000094.png  |  umm_000095.png  |  uu_000097.png
 
 ```
 
