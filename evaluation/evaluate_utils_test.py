@@ -136,13 +136,6 @@ def validate_results(p, current, reference):
             else:
                 print('No new best depth estimation model %.3f -> %.3f' %(reference['depth']['rmse'], current['depth']['rmse']))
                 improvement = False
-            # if current['depth']['silog'] < reference['depth']['silog']:
-            #     print('New best depth estimation model %.3f -> %.3f' %(reference['depth']['silog'], current['depth']['silog']))
-            #     improvement = True
-            # else:
-            #     print('No new best depth estimation model %.3f -> %.3f' %(reference['depth']['silog'], current['depth']['silog']))
-            #     improvement = False
-            
         
         elif task == 'normals': # Surface normals (mean error)
             if current['normals']['mean'] < reference['normals']['mean']:
@@ -170,35 +163,6 @@ def validate_results(p, current, reference):
         else:
             print('No new best multi-task model %.2f -> %.2f' %(100*reference['multi_task_performance'], 100*current['multi_task_performance']))
             improvement = False
-
-       # if current['semseg_performance'] > reference['semseg_performance']:
-       #     print('New best SEMSEG-MTI model %.2f -> %.2f' %(100*reference['semseg_performance'], 100*current['semseg_performance']))
-       #     improvement = True
-
-       # else:
-       #     print('No new best SEMSEG-MTI model %.2f -> %.2f' %(100*reference['semseg_performance'], 100*current['semseg_performance']))
-       #     improvement = False     
-       
-       
-       
-        # if current['semseg']['mIoU'] > reference['semseg']['mIoU']:
-        #     print('New best semgentation model %.2f -> %.2f' %(100*reference['semseg']['mIoU'], 100*current['semseg']['mIoU']))
-        #     improvement = True
-        # else:
-        #     print('No new best semgentation model %.2f -> %.2f' %(100*reference['semseg']['mIoU'], 100*current['semseg']['mIoU']))
-        #     improvement = False
-       
-       
-        # if current['depth']['silog'] < reference['depth']['silog']:
-        #     print('New best depth model %.2f -> %.2f' %(reference['depth']['silog'], current['depth']['silog']))
-        #     improvement = True
-        # else:
-        #     print('No new best depth model %.2f -> %.2f' %(reference['depth']['silog'], current['depth']['silog']))
-        #     improvement = False
-       
-       
-            
-            
 
     if improvement: # Return result
         return True, current
@@ -244,8 +208,6 @@ def save_model_predictions(p, val_loader, model):
     
     with torch.no_grad(): 
         for ii, sample in enumerate(val_loader):      
-            # inputs, lidars, meta = sample['image'], sample['lidar'], sample['meta']
-            # inputs, meta = sample['image'].cuda(non_blocking=True), sample['meta']
             inputs, lidars, meta = sample['image'].cuda(non_blocking=True), sample['lidar'].cuda(non_blocking=True), sample['meta']
             
             img_size = (inputs.size(1), inputs.size(2))
