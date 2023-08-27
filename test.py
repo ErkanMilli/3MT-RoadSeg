@@ -73,7 +73,6 @@ def main():
     print(val_transforms)
     
     
-    
     print(colored('Starting Final Predictions', 'green'))
     
     checkpoint = torch.load(p['checkpoint'], map_location='cpu')
@@ -82,72 +81,6 @@ def main():
     save_model_predictions(p, val_dataloader, model)
     prob_eval_scores = fnc_evRoad(p['save_dir']+'/semseg', val_dataset)
     
-    # max_F_score = 0
-    # # Resume from checkpoint
-    # if os.path.exists(p['checkpoint']):
-    #     print(colored('Restart from checkpoint {}'.format(p['checkpoint']), 'green'))
-    #     checkpoint = torch.load(p['checkpoint'], map_location='cpu')
-    #     optimizer.load_state_dict(checkpoint['optimizer'])
-    #     model.load_state_dict(checkpoint['model'])
-    #     start_epoch = checkpoint['epoch']
-    #     max_F_score = checkpoint['best_result']
-
-    # else:
-    #     print(colored('No checkpoint file at {}'.format(p['checkpoint']), 'green'))
-    #     start_epoch = 0
-    #     save_model_predictions(p, val_dataloader, model)
-    #     prob_eval_scores = fnc_evRoad(p['save_dir']+'/semseg', val_dataset)
-    #     MaxF = prob_eval_scores[1]
-    #     max_F_score = MaxF
-    
-    # # Main loop
-    # print(colored('Starting main loop', 'green'))
-
-    # for epoch in range(start_epoch, p['epochs']):
-    #     print(colored('Epoch %d/%d' %(epoch+1, p['epochs']), 'yellow'))
-    #     print(colored('-'*10, 'yellow'))
-
-    #     # Adjust lr
-    #     lr = adjust_learning_rate(p, optimizer, epoch)
-    #     print('Adjusted learning rate to {:.5f}'.format(lr))
-
-    #     # Train 
-    #     print('Train ...')
-    #     eval_train = train_vanilla(p, train_dataloader, model, criterion, optimizer, epoch)
-
-    #     # Evaluate
-    #         # Check if need to perform eval first
-    #     if 'eval_final_10_epochs_only' in p.keys() and p['eval_final_10_epochs_only']: # To speed up -> Avoid eval every epoch, and only test during final 10 epochs.
-    #         if epoch + 1 > p['epochs'] - 10:
-    #             eval_bool = True
-    #         else:
-    #             eval_bool = False
-    #     else:
-    #         eval_bool = True
-
-    #     # Perform evaluation
-    #     if eval_bool:
-    #         print('Evaluate ...')
-    #         save_model_predictions(p, val_dataloader, model)
-    #         prob_eval_scores = fnc_evRoad(p['save_dir']+'/semseg', val_dataset)
-    #         MaxF = prob_eval_scores[1]
-            
-    #         if MaxF > max_F_score:
-    #             print('Save new best model')
-    #             max_F_score = MaxF
-    #             torch.save(model.state_dict(), p['best_model'])
-
-    #             print('Checkpoint ...')
-    #             torch.save({'optimizer': optimizer.state_dict(), 'model': model.state_dict(), 
-    #                         'epoch': epoch + 1, 'best_result': max_F_score}, p['checkpoint'])
-
-    # # Evaluate best model at the end
-    # print(colored('Evaluating best model at the end', 'green'))
-    # model.load_state_dict(torch.load(p['checkpoint'])['model'])
-    # save_model_predictions(p, val_dataloader, model)
-    # prob_eval_scores = fnc_evRoad(p['save_dir']+'/semseg', val_dataset)
-    # MaxF = prob_eval_scores[1]
-    # # eval_stats = eval_all_results(p)
 
 if __name__ == "__main__":
     # Parser
