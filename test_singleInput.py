@@ -77,7 +77,7 @@ if __name__ == "__main__":
     #                     help='Config file for the experiment')
     parser.add_argument('--config_exp', default = 'configs/kitti/hrnet32/mti_net_normals.yml',
                         help='Config file for the experiment')
-    parser.add_argument('--singleInput_path', default = '/path/to/databases/KITTIRoad/training/',
+    parser.add_argument('--singleInput_path', default = '/path/to/databases/KITTIRoad/testing/',
                         help='Config file for the experiment')
     parser.add_argument('--img_size', default = (1280, 384),
                         help='Config file for the experiment')
