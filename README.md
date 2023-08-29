@@ -16,7 +16,7 @@ The package versions used during code development are as follows:
 - Opencv-python: 4.5.3.56
 
 ## Datasets
-You can download the KITTI road dataset from [KITTI](https://www.cvlibs.net/datasets/kitti/) and the Cityscapes road dataset from [Cityscapes](https://www.cityscapes-dataset.com/). Depth images can be obtained from the [SNE-RoadSeg](https://github.com/hlwang1124/SNE-RoadSeg). You can access the 3-channel ADIs from here.
+You can download the KITTI road dataset from [KITTI](https://www.cvlibs.net/datasets/kitti/) and the Cityscapes road dataset from [Cityscapes](https://www.cityscapes-dataset.com/). Depth images can be obtained from the [SNE-RoadSeg](https://github.com/hlwang1124/SNE-RoadSeg). You can access the 3-channel ADIs from [here](https://drive.google.com/drive/folders/1n3CgKbr3OgfZ7YYE-dX5JrCHjmcDnbY5?usp=drive_link).
 
 ```
 3MT-RoadSeg
@@ -43,13 +43,17 @@ train.py --config_env configs/env.yml --config_exp configs/$DATASET/$BACKBONE/$M
 ```
 You can perform a test on the validation set created by splitting the training set. You will need the chechpoint.pth.rar file for this. 
 ```
-test.py
+test.py ---config_env configs/env.yml --config_exp configs/$DATASET/$BACKBONE/$MODEL.yml
+```
+Additionally, if you only want to output for single input, you can do this using test_singleInput.py like this: 
+```
+test_singleInput.py ---config_env configs/env.yml --config_exp configs/$DATASET/$BACKBONE/$MODEL.yml
 ```
 
 You can use the same split we used for the validation set generated from the training set. The train & test split is as follows:
 ```
-| Train Split  |                                                | Test Split   |
-|--------------|                                                |--------------|
+|                  Train Split                   |              |                   Test Split                   |
+|------------------------------------------------|              |------------------------------------------------|
 um_000000.png  |  umm_000000.png  |  uu_000000.png              um_000068.png  |  umm_000068.png  |  uu_000068.png
 ...            |  ...             |  ...                        ...            |  ...             |  ...
 ...            |  ...             |  ...                        ...            |  ...             |  ...
