@@ -176,35 +176,7 @@ def validate_results(p, current, reference):
         else:
             print('No new best multi-task model %.2f -> %.2f' %(100*reference['multi_task_performance'], 100*current['multi_task_performance']))
             improvement = False
-
-       # if current['semseg_performance'] > reference['semseg_performance']:
-       #     print('New best SEMSEG-MTI model %.2f -> %.2f' %(100*reference['semseg_performance'], 100*current['semseg_performance']))
-       #     improvement = True
-
-       # else:
-       #     print('No new best SEMSEG-MTI model %.2f -> %.2f' %(100*reference['semseg_performance'], 100*current['semseg_performance']))
-       #     improvement = False     
        
-       
-       
-        # if current['semseg']['mIoU'] > reference['semseg']['mIoU']:
-        #     print('New best semgentation model %.2f -> %.2f' %(100*reference['semseg']['mIoU'], 100*current['semseg']['mIoU']))
-        #     improvement = True
-        # else:
-        #     print('No new best semgentation model %.2f -> %.2f' %(100*reference['semseg']['mIoU'], 100*current['semseg']['mIoU']))
-        #     improvement = False
-       
-       
-        # if current['depth']['silog'] < reference['depth']['silog']:
-        #     print('New best depth model %.2f -> %.2f' %(reference['depth']['silog'], current['depth']['silog']))
-        #     improvement = True
-        # else:
-        #     print('No new best depth model %.2f -> %.2f' %(reference['depth']['silog'], current['depth']['silog']))
-        #     improvement = False
-       
-       
-            
-            
 
     if improvement: # Return result
         return True, current
@@ -261,7 +233,7 @@ def save_model_predictions(p, inputPath, img_size, model):
         path = os.path.join(os.getcwd())
         inputs = np.array(Image.open(os.path.join(path + inputPath + 'image_2_split/' + sample + '.png')).convert('RGB')).astype(np.float32)
 
-        lidars = np.array(Image.open(os.path.join(path + inputPath + 'ADI/rgb_trainSplit/transDepth/tr2/' + sample + '.png')).convert('RGB')).astype(np.float32)
+        lidars = np.array(Image.open(os.path.join(path + inputPath + 'ADI/rgb_testSplit/transDepth/tr2/' + sample + '.png')).convert('RGB')).astype(np.float32)
         # lidars = cv2.imread(os.path.join(path + inputPath + 'ADI/rgb/transDepth/tr2/' + sample), cv2.COLOR_BGR2RGB).astype(np.float32)
         inputs_res = cv2.resize(inputs, img_size)
         
