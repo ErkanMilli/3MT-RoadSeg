@@ -7,7 +7,7 @@ The training setup in the repo is now available for the KITTI and Cityscapes dat
 
 ![Scheme](https://user-images.githubusercontent.com/50530899/215703789-ed633586-ca8c-4d44-a74d-366e201a3cd5.png)
 
-#### Media
+### Media
 [![3MT_ss](https://github.com/ErkanMilli/3MT-RoadSeg/blob/main/3MT_youtube.png)](https://www.youtube.com/watch?v=ESNmc9y17ZE&ab_channel=ErkanMilli)
 
 ## Package Versions
